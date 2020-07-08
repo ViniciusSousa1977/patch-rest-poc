@@ -36,6 +36,12 @@ public class CustomerService {
 	}
 	
 	public void updateCustomer(Customer customerPatched) {
+		int index = customers.indexOf(customerPatched);
+		
+		if(index > -1){
+			customers.add(index, customerPatched);
+        }
+		
 		System.out.println("Salvando customer.....");
 	}	
 }
