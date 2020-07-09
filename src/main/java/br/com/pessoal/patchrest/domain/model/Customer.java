@@ -10,17 +10,19 @@ public class Customer {
 	private String telephone;
 	private List<String> favorites;
 	private Map<String, Boolean> communicationPreferences;
+	private List<PaymentCard> paymentCads;
 
 	public Customer() {
 		
 	}
 	
 	public Customer(String id, String telephone, List<String> favorites,
-			Map<String, Boolean> communicationPreferences) {
+			Map<String, Boolean> communicationPreferences, List<PaymentCard> paymentCads) {
 		this.id = id;
 		this.telephone = telephone;
 		this.favorites = favorites;
 		this.communicationPreferences = communicationPreferences;
+		this.paymentCads = paymentCads;
 	}
 
 	/**
@@ -77,6 +79,20 @@ public class Customer {
 	 */
 	public void setCommunicationPreferences(Map<String, Boolean> communicationPreferences) {
 		this.communicationPreferences = communicationPreferences;
+	}
+	
+	/**
+	 * @return the paymentCads
+	 */
+	public List<PaymentCard> getPaymentCads() {
+		return paymentCads;
+	}
+
+	/**
+	 * @param paymentCads the paymentCads to set
+	 */
+	public void setPaymentCads(List<PaymentCard> paymentCads) {
+		this.paymentCads = paymentCads;
 	}
 
 	@Override

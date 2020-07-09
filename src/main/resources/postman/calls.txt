@@ -1,0 +1,38 @@
+-- Existem 3 customers de exemplos com ids 1, 2 e 3
+
+curl --location --request GET 'localhost:8080/customers/1'
+
+
+curl --location --request PATCH 'localhost:8080/customers/1' \
+--header 'Content-Type: application/json-patch+json' \
+--data-raw '[
+    {"op":"replace","path":"/telephone","value":"+1-555-56"}, 
+    {"op":"add","path":"/favorites/0","value": "Bread"},
+    {"op":"replace","path":"/communicationPreferences","value":{"post": true, "email": false}},
+    {"op":"add","path":"/paymentCads/-",
+        "value":{
+            "id": 3,
+            "cardNumber": 98765432198,
+            "flag": "AMEX"
+        }
+    }
+]'
+
+
+curl --location --request PATCH 'localhost:8080/customers/2' \
+--header 'Content-Type: application/json-patch+json' \
+--data-raw '[
+    {"op":"remove","path":"/telephone"},
+    {"op":"remove","path":"/favorites/1"},
+    {"op":"replace","path":"/communicationPreferences","value":{"post": false, "email": false}}
+]'
+
+
+curl --location --request PATCH 'localhost:8080/customers/3' \
+--header 'Content-Type: application/json-patch+json' \
+--data-raw '[
+    {"op":"copy", "from":"/favorites/0", "path": "/favorites/-"},
+    {"op":"remove", "path": "/favorites/2"},
+    {"op":"move", "from":"/favorites/2", "path": "/favorites/0"},
+    {"op":"replace","path":"/communicationPreferences","value":{"post": false, "email": false, "whatsapp": true}}
+]'

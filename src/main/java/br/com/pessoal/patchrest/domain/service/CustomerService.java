@@ -9,6 +9,7 @@ import java.util.Map;
 import org.springframework.stereotype.Service;
 
 import br.com.pessoal.patchrest.domain.model.Customer;
+import br.com.pessoal.patchrest.domain.model.PaymentCard;
 
 @Service
 public class CustomerService {
@@ -20,9 +21,17 @@ public class CustomerService {
 		map.put("post", true);
 		map.put("email", true);
 		
-		customers.add(new Customer("1", "19 983303977", Arrays.asList("Eggs", "Milk"), map));
-		customers.add(new Customer("2", "21 984781148", Arrays.asList("Eggs", "Milk", "Coke"), map));
-		customers.add(new Customer("3", "41 756489521", Arrays.asList("Eggs", "Milk", "Coke", "Cheese"), map));
+		List<PaymentCard> cardsCustomer1 = new ArrayList<PaymentCard>();
+		cardsCustomer1.add(new PaymentCard(1L, 45625431625L, "Visa"));
+		cardsCustomer1.add(new PaymentCard(2L, 84245895474L, "Mastercard"));
+		
+		List<PaymentCard> cardsCustomer2 = new ArrayList<PaymentCard>();
+		cardsCustomer2.add(new PaymentCard(1L, 81548856441L, "AMEX"));
+		cardsCustomer2.add(new PaymentCard(2L, 32548988627L, "Mastercard"));
+		
+		customers.add(new Customer("1", "19 983303977", Arrays.asList("Eggs", "Milk"), map, cardsCustomer1));
+		customers.add(new Customer("2", "21 984781148", Arrays.asList("Eggs", "Milk", "Coke"), map, cardsCustomer2));
+		customers.add(new Customer("3", "41 756489521", Arrays.asList("Eggs", "Milk", "Coke", "Cheese"), map, null));
 	}
 	
 	public Customer findCustomer(String id) {
